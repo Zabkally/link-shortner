@@ -27,14 +27,14 @@ urlRoute.post("/", async (req, res) => {
     });
 
     return res.status(201).json({
-      shortUrl: `${req.protocol}://${req.hostname}:8000/${shortUrl}`,
+      shortUrl: `${req.protocol}://${req.hostname}/${shortUrl}`,
       message: "success",
     });
   } catch (error) {
     if (error.message.includes("duplicate")) {
       const url = await UrlModel.findOne({ url: clientUrl });
       return res.status(400).json({
-        message: `Duplicate URL! Your shortUrl is: ${req.protocol}://${req.hostname}:8000/${url.shortUrl}`,
+        message: `Duplicate URL! Your shortUrl is: ${req.protocol}://${req.hostname}/${url.shortUrl}`,
       });
     }
   }
